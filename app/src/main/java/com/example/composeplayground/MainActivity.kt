@@ -29,6 +29,7 @@ import coil.compose.rememberImagePainter
 import com.example.composeplayground.ui.theme.ComposePlaygroundTheme
 import kotlinx.coroutines.launch
 import java.lang.Integer.max
+import java.time.chrono.HijrahChronology
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,10 +41,38 @@ class MainActivity : ComponentActivity() {
 //                    LayoutsCodelab()
 //                    ImageList()
 //                    BodyContent()
-                    DecoupledConstraintLayout()
+//                    DecoupledConstraintLayout()
+                    TwoTexts(text1 = "Hi", text2 = "there")
                 }
             }
         }
+    }
+}
+
+@Composable
+fun TwoTexts(modifier: Modifier = Modifier, text1: String, text2: String) {
+    Row(modifier = modifier.height(IntrinsicSize.Min)) {
+        Text(
+            text = text1, modifier = Modifier
+                .weight(1f)
+                .padding(start = 4.dp)
+                .wrapContentWidth(Alignment.Start)
+        )
+
+        Divider(
+            color = Color.Black,
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(1.dp)
+        )
+
+        Text(
+            text = text2, modifier = Modifier
+                .weight(1f)
+                .padding(end = 4.dp)
+                .wrapContentWidth(Alignment.End)
+        )
+
     }
 }
 
@@ -272,6 +301,14 @@ fun Chip(modifier: Modifier = Modifier, text: String) {
             Spacer(Modifier.width(4.dp))
             Text(text = text)
         }
+    }
+}
+
+@Preview
+@Composable
+fun TwoTextPreview() {
+    ComposePlaygroundTheme {
+        TwoTexts(text1 = "Hi", text2 = "there")
     }
 }
 
